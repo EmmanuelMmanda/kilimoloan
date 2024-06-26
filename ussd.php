@@ -77,7 +77,7 @@ elseif (preg_match('/^1\*1\*\d+\*\d+$/', $text)) { // Matches 1*1*{loan_type_id}
     $query = "SELECT type_name FROM loan_types WHERE id = '$loan_type_id'";
     $ltype = $conn->query($query)->fetch_assoc();
     $typename = $ltype['type_name'];
-    $response = "CON Umekubaliana na mkopo wa $amount TZS, aina ya mkopo inayotumika ni: $typename.\n";
+    $response = "CON Unataka kuomba mkopo wa $amount TZS, aina ya mkopo inayotumika ni: $typename.\n";
     $response .= "1. Ndiyo\n";
     $response .= "2. Hapana";
 }
@@ -95,7 +95,7 @@ elseif (preg_match('/^1\*1\*\d+\*\d+\*1$/', $text)) { // Matches 1*1*{loan_type_
     }
 }
 elseif (preg_match('/^1\*1\*\d+\*\d+\*2$/', $text)) { // Matches 1*1*{loan_type_id}*{amount}*2 (Hapana)
-    $response = "END Ombi lako la mkopo limekataliwa.";
+    $response = "END Ombi lako la kuomba mkopo limesitishwa.";
 }
 // Handle Taasisi flow
 elseif ($text == "1*2") {
@@ -123,7 +123,7 @@ elseif (preg_match('/^1\*2\*\d+\*\d+$/', $text)) { // Matches 1*2*{loan_type_id}
     $query = "SELECT type_name FROM loan_types WHERE id = '$loan_type_id'";
     $ltype = $conn->query($query)->fetch_assoc();
     $typename = $ltype['type_name'];
-    $response = "CON Umekubaliana na mkopo wa $amount TZS, aina ya mkopo inayotumika ni: $typename.\n";
+    $response = "CON Unataka kuomba mkopo wa $amount TZS, aina ya mkopo inayotumika ni: $typename.\n";
     $response .= "1. Ndiyo\n";
     $response .= "2. Hapana";
 }
@@ -141,7 +141,7 @@ elseif (preg_match('/^1\*2\*\d+\*\d+\*1$/', $text)) { // Matches 1*2*{loan_type_
     }
 }
 elseif (preg_match('/^1\*2\*\d+\*\d+\*2$/', $text)) { // Matches 1*2*{loan_type_id}*{amount}*2 (Hapana)
-    $response = "END Ombi lako la mkopo limekataliwa.";
+    $response = "END Ombi lako la kuomba mkopo limesitishwa.";
 }
 // Handle Kikundi flow
 elseif ($text == "1*3") {
@@ -169,7 +169,7 @@ elseif (preg_match('/^1\*3\*\d+\*\d+$/', $text)) { // Matches 1*3*{loan_type_id}
     $query = "SELECT type_name FROM loan_types WHERE id = '$loan_type_id'";
     $ltype = $conn->query($query)->fetch_assoc();
     $typename = $ltype['type_name'];
-    $response = "CON Umekubaliana na mkopo wa $amount TZS, aina ya mkopo inayotumika ni : $typename.\n";
+    $response = "CON Unataka kuomba mkopo wa $amount TZS, aina ya mkopo inayotumika ni : $typename.\n";
     $response .= "1. Ndiyo\n";
     $response .= "2. Hapana";
 }
@@ -187,7 +187,7 @@ elseif (preg_match('/^1\*3\*\d+\*\d+\*1$/', $text)) { // Matches 1*3*{loan_type_
     }
 }
 elseif (preg_match('/^1\*3\*\d+\*\d+\*2$/', $text)) { // Matches 1*3*{loan_type_id}*{amount}*2 (Hapana)
-    $response = "END Ombi lako la mkopo limekataliwa.";
+    $response = "END Ombi lako la kuomba mkopo limesitishwa.";
 }
 
 // Send the response back to Africa's Talking
