@@ -6,11 +6,9 @@ FIRST Download
 
 2."TEXT EDITOR" NOTEPAD++ OR SUBLIME TEXT 3 / ETC.
 
-3"Loan_Management_System"
+3"kilimoloan"
 
-4. Download the zip file/ download winrar
-
-5. Extract the file and copy "Loan_Management_System" folder
+5. Extract the file and copy "kilimoloan" folder
 
 6.Paste inside root directory/ where you install xammp local disk C: drive D: drive E: paste: (for xampp/htdocs, 
 
@@ -20,16 +18,50 @@ FIRST Download
 
 6. Import loan_db.sql file(given inside the zip package in SQL file folder)
 
-7.Run the script http://localhost/Loan_Management_System
+7.Run the script http://localhost/kilimoloan
 
 
-**LOGIN DETAILS** 
++++++++++++++++  USSD AND AFRICAS TALKING +++++++++++++++++++++++
 
-creat your own staff
+
+ngrok tunnneling for africas talking ussd 
+
+signupp on ngrok , get your auth token 
+
+apply auth token to ngrok.exe 
+
+Server you php project using   :    php -S localhost:8000  
+
+
+use ngrok.exe while on project folder  to tunnel :  .\ngrok.exe http 8000 , 
+
+use same port for php serve and ngrok , ie 8000 above 
+
+Get the ngroke free tunneling url and add it to Africas Talking USSD code callback 
+
+On africas talking sandbox  go to sms and createv an new alphanumeris called " PEMBEJEO LOANS"
+
+++++++ IMPORTANT  +++
+
+UPDAT THE API KEY on ussd.php file and admin_class.php file sendMessage() functions ....... 
+
++++++++++++++++++
+
+
+
+**LOGIN DETAILS   and USAGE** 
  
 Admin
 user: admin
 pass: admin123
 
-****** www.campcodes.com ******
-Subcribe my You tube Channel **** SerBermz ****
+
+--- Create new Borrrower , Phone number is important and MUST be in format  +255XXXXXXXXX .. 
+
+--- Use Africas talking simulator https://developers.africastalking.com/simulator  , with your created ussd service code  ...
+
+
+___________________________________________________
+
+DONE ..___
+

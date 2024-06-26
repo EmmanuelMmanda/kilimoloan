@@ -63,7 +63,7 @@
 						 	<td class="text-center"><?php echo $i++ ?></td>
 						 	<td>
 						 		<p>Name :<b><?php echo $row['name'] ?></b></p>
-						 		<p><small>Contact # :<b><?php echo $row['contact_no'] ?></small></b></p>
+						 		<p><small>Phone Number # :<b><?php echo $row['contact_no'] ?></small></b></p>
 						 		<p><small>Address :<b><?php echo $row['address'] ?></small></b></p>
 						 	</td>
 						 	<td>

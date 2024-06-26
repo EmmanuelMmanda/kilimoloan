@@ -48,7 +48,7 @@
 										:<b><?php echo ucwords($row['lastname'] . ", " . $row['firstname'] . ' ' . $row['middlename']) ?></b>
 									</p>
 									<p><small>Address :<b><?php echo $row['address'] ?></small></b></p>
-									<p><small>Contact # :<b><?php echo $row['contact_no'] ?></small></b></p>
+									<p><small>Phone Number # :<b><?php echo $row['contact_no'] ?></small></b></p>
 									<p><small>Email :<b><?php echo $row['email'] ?></small></b></p>
 									<p><small>Borrower Type :<b><?php echo $row['name'] ?></small></b></p>
 									<p><small>Tax ID / NIDA / Brella :<b><?php echo $row['tax_id'] ?></small></b></p>
