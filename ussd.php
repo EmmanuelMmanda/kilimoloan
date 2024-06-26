@@ -17,12 +17,12 @@ $response = "END Neno lisilotambulika. Tafadhali jaribu tena.";
 
 // Main menu
 if ($text == "") {
-    if(!$borrower){
+    if (!$borrower) {
         $response = "END habari , Hujasajiliwa katika mfumo wa mikopo ya pembejeo , wasiliana nasi kupitia namba ya huduma kwa wteja +255200112233 ili usajiliwe ";
-        sendMessage($phoneNumber,'register');
+        sendMessage($phoneNumber, 'register');
 
-    }else{
-        $name = $borrower['firstname']. ' '. $borrower['lastname'];
+    } else {
+        $name = $borrower['firstname'] . ' ' . $borrower['lastname'];
         $response = "CON Karibu .$name. kwenye mfumo wa pembejeo Tanzania\n Chagua huduma\n";
         $response .= "1. Omba mkopo\n";
         $response .= "2. Maelezo ya mikopo\n";
@@ -39,7 +39,7 @@ elseif ($text == "1") {
 // Maelezo ya mikopo
 elseif ($text == "2") {
     $response = "END Mikopo hii ni maalumu kwa wakulima waliojisajili katika ofisi za halmashauri za wilaya";
-    sendMessage($phoneNumber,'loans_info');
+    sendMessage($phoneNumber, 'loans_info');
 
 }
 // Lipa mkopo
@@ -50,7 +50,7 @@ elseif ($text == "3") {
     $response .= "2. Barua Pepe: mikopo@pemebejeo.go.tz\n";
     $response .= "3. Fika Ofisi ilio karibu nawe kwa malekezo ya malipo \n";
 
-    sendMessage($phoneNumber,'repayment_details');
+    sendMessage($phoneNumber, 'repayment_details');
 }
 // Handle Mkulima Binafsi flow
 elseif ($text == "1*1") {
@@ -65,13 +65,11 @@ elseif ($text == "1*1") {
     } else {
         $response .= "Hakuna aina za mikopo.\n";
     }
-}
-elseif (preg_match('/^1\*1\*\d+$/', $text)) { // Matches 1*1*{loan_type_id}
+} elseif (preg_match('/^1\*1\*\d+$/', $text)) { // Matches 1*1*{loan_type_id}
     $loan_type_id = $inputArray[2];
 
     $response = "CON Ingiza kiasi cha mkopo ,  (TZS)\n";
-}
-elseif (preg_match('/^1\*1\*\d+\*\d+$/', $text)) { // Matches 1*1*{loan_type_id}*{amount}
+} elseif (preg_match('/^1\*1\*\d+\*\d+$/', $text)) { // Matches 1*1*{loan_type_id}*{amount}
     $loan_type_id = $inputArray[2];
     $amount = $inputArray[3];
     $query = "SELECT type_name FROM loan_types WHERE id = '$loan_type_id'";
@@ -80,11 +78,10 @@ elseif (preg_match('/^1\*1\*\d+\*\d+$/', $text)) { // Matches 1*1*{loan_type_id}
     $response = "CON Unataka kuomba mkopo wa $amount TZS, aina ya mkopo inayotumika ni: $typename.\n";
     $response .= "1. Ndiyo\n";
     $response .= "2. Hapana";
-}
-elseif (preg_match('/^1\*1\*\d+\*\d+\*1$/', $text)) { // Matches 1*1*{loan_type_id}*{amount}*1 (Ndiyo)
+} elseif (preg_match('/^1\*1\*\d+\*\d+\*1$/', $text)) { // Matches 1*1*{loan_type_id}*{amount}*1 (Ndiyo)
     $loan_type_id = $inputArray[2];
     $amount = $inputArray[3];
-  
+
     // Call save_loan function for Mkulima Binafsi
     $result = save_loan($phoneNumber, 'Mkulima Binafsi', $loan_type_id, $amount);
 
@@ -93,8 +90,7 @@ elseif (preg_match('/^1\*1\*\d+\*\d+\*1$/', $text)) { // Matches 1*1*{loan_type_
     } else {
         $response = "END Kuna tatizo katika kuwasilisha ombi lako. Tafadhali jaribu tena baadaye.";
     }
-}
-elseif (preg_match('/^1\*1\*\d+\*\d+\*2$/', $text)) { // Matches 1*1*{loan_type_id}*{amount}*2 (Hapana)
+} elseif (preg_match('/^1\*1\*\d+\*\d+\*2$/', $text)) { // Matches 1*1*{loan_type_id}*{amount}*2 (Hapana)
     $response = "END Ombi lako la kuomba mkopo limesitishwa.";
 }
 // Handle Taasisi flow
@@ -110,14 +106,12 @@ elseif ($text == "1*2") {
     } else {
         $response .= "Hakuna aina za mikopo.\n";
     }
-}
-elseif (preg_match('/^1\*2\*\d+$/', $text)) { // Matches 1*2*{loan_type_id}
+} elseif (preg_match('/^1\*2\*\d+$/', $text)) { // Matches 1*2*{loan_type_id}
     $loan_type_id = $inputArray[2];
 
     $response = "CON Ingiza kiasi cha mkopo (TZS)\n";
-   
-}
-elseif (preg_match('/^1\*2\*\d+\*\d+$/', $text)) { // Matches 1*2*{loan_type_id}*{amount}
+
+} elseif (preg_match('/^1\*2\*\d+\*\d+$/', $text)) { // Matches 1*2*{loan_type_id}*{amount}
     $loan_type_id = $inputArray[2];
     $amount = $inputArray[3];
     $query = "SELECT type_name FROM loan_types WHERE id = '$loan_type_id'";
@@ -126,8 +120,7 @@ elseif (preg_match('/^1\*2\*\d+\*\d+$/', $text)) { // Matches 1*2*{loan_type_id}
     $response = "CON Unataka kuomba mkopo wa $amount TZS, aina ya mkopo inayotumika ni: $typename.\n";
     $response .= "1. Ndiyo\n";
     $response .= "2. Hapana";
-}
-elseif (preg_match('/^1\*2\*\d+\*\d+\*1$/', $text)) { // Matches 1*2*{loan_type_id}*{amount}*1 (Ndiyo)
+} elseif (preg_match('/^1\*2\*\d+\*\d+\*1$/', $text)) { // Matches 1*2*{loan_type_id}*{amount}*1 (Ndiyo)
     $loan_type_id = $inputArray[2];
     $amount = $inputArray[3];
 
@@ -139,8 +132,7 @@ elseif (preg_match('/^1\*2\*\d+\*\d+\*1$/', $text)) { // Matches 1*2*{loan_type_
     } else {
         $response = "END Kuna tatizo katika kuwasilisha ombi lako. Tafadhali jaribu tena baadaye.";
     }
-}
-elseif (preg_match('/^1\*2\*\d+\*\d+\*2$/', $text)) { // Matches 1*2*{loan_type_id}*{amount}*2 (Hapana)
+} elseif (preg_match('/^1\*2\*\d+\*\d+\*2$/', $text)) { // Matches 1*2*{loan_type_id}*{amount}*2 (Hapana)
     $response = "END Ombi lako la kuomba mkopo limesitishwa.";
 }
 // Handle Kikundi flow
@@ -156,14 +148,12 @@ elseif ($text == "1*3") {
     } else {
         $response .= "Hakuna aina za mikopo.\n";
     }
-}
-elseif (preg_match('/^1\*3\*\d+$/', $text)) { // Matches 1*3*{loan_type_id}
+} elseif (preg_match('/^1\*3\*\d+$/', $text)) { // Matches 1*3*{loan_type_id}
     $loan_type_id = $inputArray[2];
 
     $response = "CON Ingiza kiasi cha mkopo (TZS)\n";
-   
-}
-elseif (preg_match('/^1\*3\*\d+\*\d+$/', $text)) { // Matches 1*3*{loan_type_id}*{amount}
+
+} elseif (preg_match('/^1\*3\*\d+\*\d+$/', $text)) { // Matches 1*3*{loan_type_id}*{amount}
     $loan_type_id = $inputArray[2];
     $amount = $inputArray[3];
     $query = "SELECT type_name FROM loan_types WHERE id = '$loan_type_id'";
@@ -172,8 +162,7 @@ elseif (preg_match('/^1\*3\*\d+\*\d+$/', $text)) { // Matches 1*3*{loan_type_id}
     $response = "CON Unataka kuomba mkopo wa $amount TZS, aina ya mkopo inayotumika ni : $typename.\n";
     $response .= "1. Ndiyo\n";
     $response .= "2. Hapana";
-}
-elseif (preg_match('/^1\*3\*\d+\*\d+\*1$/', $text)) { // Matches 1*3*{loan_type_id}*{amount}*1 (Ndiyo)
+} elseif (preg_match('/^1\*3\*\d+\*\d+\*1$/', $text)) { // Matches 1*3*{loan_type_id}*{amount}*1 (Ndiyo)
     $loan_type_id = $inputArray[2];
     $amount = $inputArray[3];
 
@@ -185,8 +174,7 @@ elseif (preg_match('/^1\*3\*\d+\*\d+\*1$/', $text)) { // Matches 1*3*{loan_type_
     } else {
         $response = "END Kuna tatizo katika kuwasilisha ombi lako. Tafadhali jaribu tena baadaye.";
     }
-}
-elseif (preg_match('/^1\*3\*\d+\*\d+\*2$/', $text)) { // Matches 1*3*{loan_type_id}*{amount}*2 (Hapana)
+} elseif (preg_match('/^1\*3\*\d+\*\d+\*2$/', $text)) { // Matches 1*3*{loan_type_id}*{amount}*2 (Hapana)
     $response = "END Ombi lako la kuomba mkopo limesitishwa.";
 }
 
@@ -198,7 +186,8 @@ echo $response;
 $conn->close();
 
 // Function to save loan application to database
-function save_loan($phoneNumber, $borrower_type, $loan_type_id, $amount) {
+function save_loan($phoneNumber, $borrower_type, $loan_type_id, $amount)
+{
     global $conn;
 
     // Fetch borrower_id based on phoneNumber
@@ -210,19 +199,35 @@ function save_loan($phoneNumber, $borrower_type, $loan_type_id, $amount) {
         return false; // Return error if borrower not found
     }
 
-    $borrower_id = $borrower['id'];
-    $ref_no = random_int(100,590909890);
-    // Prepare data string for SQL query
-    $data = " borrower_id = '$borrower_id' ";
-    $data .= " , loan_type_id = '$loan_type_id' ";
-    $data .= " , ref_no = '$ref_no' ";
-    $data .= " , amount = '$amount' ";
-    $data .= " , purpose = 'Pembejeo' ";
-    $data .= " , plan_id = 1 ";
-    $data .= " , status = '0' "; // 0 (requesteing)
 
-    // Save loan application to loan_list table
-    $save = $conn->query("INSERT INTO loan_list SET ".$data);
+    // Sample data
+    $borrower_id = $borrower['id'];
+    $loan_type_id = $loan_type_id;  // Make sure this variable is properly defined
+    $ref_no = random_int(100, 590909890);
+    $amount = $amount;  // Make sure this variable is properly defined
+
+    // Escape input data to prevent SQL injection
+    $borrower_id = $conn->real_escape_string($borrower_id);
+    $loan_type_id = $conn->real_escape_string($loan_type_id);
+    $ref_no = $conn->real_escape_string($ref_no);
+    $amount = $conn->real_escape_string($amount);
+    $purpose = 'Pembejeo';  // Static value, no need to escape
+    $plan_id = 1;           // Static value, no need to escape
+    $status = 0;            // Static value, no need to escape
+
+    // Construct the SQL query
+    $sql = "INSERT INTO loan_list (borrower_id, loan_type_id, ref_no, amount, purpose, plan_id, status) VALUES (
+    '$borrower_id',
+    '$loan_type_id',
+    '$ref_no',
+    '$amount',
+    '$purpose',
+    $plan_id,
+    $status
+)";
+
+    // Execute the query
+    $save = $conn->query($sql);
 
     if ($save) {
         sendMessage($phoneNumber, 'success_loan_request');
@@ -236,11 +241,12 @@ function save_loan($phoneNumber, $borrower_type, $loan_type_id, $amount) {
 
 
 
-function sendMessage($phoneNumber, $messageType) {
+function sendMessage($phoneNumber, $messageType)
+{
     // Replace these with your own credentials
     $username = "Sandbox";
     $apiKey = "atsk_38b30abe434109925dd72a426458edc88c4bb7ca6965703b2fdabe3c17a9c6b8a3f18848";
-    $senderId = "PEMBEJEO LOANS"; 
+    $senderId = "PEMBEJEO LOANS";
 
     $repay = "KuLipa mkopo katika Taasisi ya Pembejeo\n";
     $repay .= "Wasiliana nasi kupitia\n";
